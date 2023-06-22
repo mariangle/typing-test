@@ -4,11 +4,12 @@
 
 :root {
   @apply bg-gray-100;
-  --color-bg: "white";
+  color: black;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    background: lightcoral;
+    background: rgb(0, 0, 0);
+    color: white;
   }
 }
 
