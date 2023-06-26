@@ -1,14 +1,20 @@
+import { useTypeTestContext } from "../context/TypeTestContext";
 
+interface WordProps {
+  words: string[],
+}
 
-const Words = ({ words }: { words: string[] }) => {
+const Words = ({ words }: WordProps) => {
+const { currentWordIndex } = useTypeTestContext();
+
     return (
-      <div className="bg-blue-900 max-w-lg border border-green-900 dark:border-red-900 flex items-center gap-2 flex-wrap">
-        {words.map((word, index) => (
-            <span  key={index} className="whitespace-nowrap max-w-full">
-            {word}
-            </span >
-        ))} 
-      </div>
+      <div className="flex flex-wrap max-w-[600px] w-full mx-auto border p-2 max-h-24 overflow-hidden">
+      {words.map((word, index) => (
+          <div key={index} className={`text-2xl p-1 ${index === currentWordIndex ? "bg-gray-300" : ""}`}>
+              {word}
+          </div>
+      ))}
+  </div>
     );
   };
   

@@ -1,39 +1,31 @@
-import { useEffect, useState } from "react"
-
-import englishWords from "../words/english";
+import { useTypeTestContext } from "../context/TypeTestContext";
 
 const useTypeText = () => {
-    
-    const [ words, setWords] = useState<string[]>(englishWords);
-    const [ currentWord, setCurrentWord ] = useState<string>("")
-    const [ userInput, setUserInput ] = useState<string>("")
-    const [ timer, setTimer ] = useState()
-    const [ correctWords, setCorrectWords ] = useState();
-    const [ wrongWords, setWrongWords ] = useState();
-
-    function shuffleArray(array: string[]) {
+  const { setCorrectWords, setIsPlaying, setWrongWords, setTimer, setCurrentWordIndex, setIsReady, setUserInput } = useTypeTestContext();
+    const shuffleArray =(array: string[]) => {
         const newArray = [...array]; 
 
         for (let i = newArray.length - 1; i > 0; i--) {
           const randomIndex = Math.floor(Math.random() * (i + 1));
-          [newArray[i], newArray[randomIndex]] = [newArray[randomIndex], newArray[i]]; // Swap elements
+          [newArray[i], newArray[randomIndex]] = [newArray[randomIndex], newArray[i]]; 
         }
 
         return newArray;
       }
 
-    useEffect(() => {
-        const shuffledWords = shuffleArray(words)
-        setWords(shuffledWords);
-        setCurrentWord(shuffledWords[0])
-        console.log(currentWord)
-    }, [])
+      const resetGame = () => {
+        setCorrectWords(0);
+        setIsPlaying(false);
+        setWrongWords(0);
+        setTimer(10);
+        setCurrentWordIndex(0);
+        setIsReady(true);
+        setUserInput("");
+      }
 
     return {
-        words,
-        currentWord,
-        setCurrentWord,
-        shuffleArray
+        shuffleArray,
+        resetGame,
     }
 }
 

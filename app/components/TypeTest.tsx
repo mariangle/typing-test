@@ -1,46 +1,43 @@
 "use client"
 
-import Words from "./Words";
+import { useEffect, useState } from "react";
 
-import { useEffect } from "react";
+import { useTypeTestContext } from "../context/TypeTestContext";
 
 import useTypeText from "../hooks/useTypeTest";
+import englishWords from "../words/englishWords";
+
+import Words from "./Words";
+import Timer from "./Timer";
+import Result from "./Result";
+import WordInput from "./WordInput";
 
 const TypeTest = () => {
-    const { words, currentWord, setCurrentWord } = useTypeText();
+  
+  const { shuffleArray, resetGame } = useTypeText();
+  const [words, setWords] = useState<string[]>([]);
+  const { isPlaying, isReady } = useTypeTestContext();
 
-    return (
-        <div>
-            <Words words={words} />
-            <div>user input</div>
-            <div>timer</div>
-            <div>reset timer</div>
-            <div>language</div>
-        </div>
-    )
-}
+  useEffect(() => {
+    setWords(shuffleArray(englishWords));
+  }, []);
+
+  const handleResetGame = () => {
+    setWords(shuffleArray(englishWords));
+    resetGame();
+  }
+
+  return (
+    <div>
+      {isReady && <Words words={words} />}
+      <div className="flex gap-2">
+        <WordInput words={words} />
+        <Timer />
+        {isPlaying || !isReady ? <button onClick={handleResetGame}>RESET</button> : null}
+      </div>
+      {!isPlaying && !isReady && <Result />}
+    </div>
+  );
+};
 
 export default TypeTest;
-
-    // store current word, user input, start time, end time, correct word count
-        // create state variables to store and update them when needed
-
-    // fetch and display words that user should write
-        // create file for random words
-        // generate random words
-
-    // start the timer when user starts typing
-        // if user input, start timer
-
-    // when user press space, go to next word
-        // track spacebar event and go to next word
-
-    // compare user input with displayed word
-        // compare 
-        // if match increment word count
-
-    // when timer run out
-        // calculate wpm
-        // check if top 10, store score in leaderboard
-            // if is logged in, store score with user
-            // if unauthenticated, give name input to store

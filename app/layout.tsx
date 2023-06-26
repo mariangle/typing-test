@@ -1,3 +1,4 @@
+import { TypeTestProvider } from './context/TypeTestContext'
 import ToasterContext from './context/ToasterContext'
 import AuthContext from './context/AuthContext'
 import Navbar from './components/Navbar'
@@ -20,9 +21,11 @@ export default function RootLayout({
     <html lang="en" className='dark'>
       <body className={inter.className}>
         <AuthContext>
-          <ToasterContext />
-          <Navbar />
-          {children}
+          <TypeTestProvider>
+            <ToasterContext />
+              <Navbar />
+              {children}
+          </TypeTestProvider>
         </AuthContext>
       </body>
     </html>
