@@ -15,6 +15,8 @@ type TypeTestContextProps = {
   isReady: boolean,
   userInput: string,
   results: TestResult[];
+  isInTop10: boolean,
+  setIsInTop10: React.Dispatch<React.SetStateAction<boolean>>;
   setResults: React.Dispatch<React.SetStateAction<TestResult[]>>;
   setUserInput: React.Dispatch<React.SetStateAction<string>>;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,6 +38,8 @@ const initialContext: TypeTestContextProps = {
   currentWordIndex: 0,
   userInput: "",
   results: [],
+  isInTop10: false,
+  setIsInTop10: () => {},
   setResults: () => {},
   setUserInput: () => {},
   setIsPlaying: () => {},
@@ -56,7 +60,8 @@ export const TypeTestProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isReady, setIsReady] = useState(true);
   const [userInput, setUserInput] = useState("");
-  const [results, setResults] = useState<TestResult[]>([])
+  const [results, setResults] = useState<TestResult[]>([]);
+  const [isInTop10, setIsInTop10] = useState<boolean>(false);
 
   const accuracy = (correctWords / (wrongWords + correctWords)) * 100;
   const timeTakenMinutes = 60 / 60; 
@@ -82,7 +87,9 @@ export const TypeTestProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         userInput, 
         setUserInput,
         results,
-        setResults
+        setResults,
+        isInTop10,
+        setIsInTop10
       }}  
     >
       {children}

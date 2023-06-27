@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.gradient {
+  height: fit-content;
+  z-index: 3;
+  width: 100%;
+  max-width: 800px;
+  background-image: radial-gradient(
+      at 27% 37%,
+      hsla(215, 98%, 61%, 1) 0px,
+      transparent 0%
+    ),
+    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 50%;
+  filter: blur(100px) saturate(150%);
+  top: 0px;
+  right: 0px;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.layout {
+  @apply max-w-screen-lg mx-auto dark:bg-midnight;
+}
+
+.main {
+  @apply px-4 mt-16 py-2;
+}
+
+.navbar {
+  @apply backdrop-blur-md flex justify-between items-center border-b dark:border-slate-800 fixed top-0 left-0 right-0 text-heading-light dark:text-heading-dark font-semibold z-10;
+}
+
+.app {
+  @apply px-2;
+}
+
+.dropdown {
+  @apply absolute border dark:border-slate-700 top-full mt-3 w-fit shadow-sm bg-gray-50 dark:bg-navy right-0 rounded-xl whitespace-nowrap py-2;
+}
+
+.dropdown_opt {
+  @apply p-2 text-xs hover:bg-gray-200 dark:hover:bg-slate-700 cursor-pointer;
+}
+
+.input_word {
+  @apply text-2xl w-full border dark:border-slate-700 p-2 bg-gray-50 text-heading-light dark:text-heading-dark rounded-lg dark:bg-slate-700/50 dark:border-slate-500/30;
+}
+
+.leaderboard {
+  @apply text-sm text-black dark:text-gray-200 w-full;
+}
+
+.desc {
+  @apply text-desc-light dark:text-desc-dark;
+}
+
+.head {
+  @apply text-heading-light dark:text-heading-dark;
+}
+
+.flex_center {
+  @apply flex items-center justify-center;
+}
+
+.flex_between {
+  @apply flex items-center justify-between gap-2;
+}
+
+.flex_gap {
+  @apply flex items-center gap-2;
+}
+
+.secondary_bg {
+  @apply bg-sky-100 text-sky-600 dark:bg-sky-950 bg-sky-400/10 dark:text-sky-400 border-sky-300 border-sky-400/20;
+}
+
+.primary_bg {
+  @apply bg-sky-500 text-sky-100 hover:bg-sky-600 transition-all active:bg-sky-700;
+}
+
+.nav_link {
+  @apply flex_gap text-sm text-gray-800 dark:text-white hover:text-sky-500 active:text-sky-600 dark:hover:text-sky-500 dark:active:text-sky-600 px-2 py-4 border-b-2 border-b-transparent;
+}
+
+.nav_link.active {
+  @apply border-b-sky-500;
+}
+
+tr th {
+  text-align: left;
+}
+
+td,
+th {
+  @apply p-1.5 border-b dark:border-slate-700;
+}
+
+tr:nth-child(2n) {
+  @apply bg-white dark:bg-slate-700;
+}

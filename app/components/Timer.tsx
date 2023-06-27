@@ -1,10 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useTypeText from "../hooks/useTypeTest";
 import { useTypeTestContext } from "../context/TypeTestContext";
 
 const Timer = () => {
-    const { timer, setTimer, isPlaying, setIsPlaying, setIsReady, setUserInput, wpm } = useTypeTestContext();
-    const { postTestResult, endGame } = useTypeText();
+    const { 
+      timer, 
+      setTimer, 
+      isPlaying} 
+    = useTypeTestContext();
+    const { endGame } = useTypeText();
 
   useEffect(() => {
     let timerId: NodeJS.Timeout;
@@ -32,7 +36,12 @@ const Timer = () => {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
-  return <div>{calculateElapsedTime()}</div>;
+  return (
+    <div 
+      className="border p-3 rounded-lg secondary_bg text-lg">
+      {calculateElapsedTime()}
+    </div>
+    )
 };
 
 export default Timer;

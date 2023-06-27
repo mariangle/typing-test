@@ -12,17 +12,17 @@ export const getTimeElapsed = (timestamp: Date) => {
     const minutes = differenceInMinutes(now, lastOnline);
 
     if (years > 0) {
-        return `${years} year${years > 1 ? 's' : ''} ago`;
+        return `${years}y`;
     } else if (months > 0) {
-        return `${months} month${months > 1 ? 's' : ''} ago`;
+        return `${months}m`;
     } else if (weeks > 0) {
-        return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+        return `${weeks}w`;
     } else if (days > 0) {
-        return `${days} day${days > 1 ? 's' : ''} ago`;
+        return `${days}d`;
     } else if (hours > 0) {
-        return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        return `${hours}h`;
     } else if (minutes > 0) {
-        return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        return `${minutes}m`;
     } else {
         return "Less than a minute ago";
     }

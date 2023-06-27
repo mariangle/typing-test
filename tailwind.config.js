@@ -8,10 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: "#32a4d9",
-        midnight: "#0f172a"
-      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -21,8 +17,20 @@ module.exports = {
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
-        'primary': '#FF5722',
-      }
+        primary: "#32a4d9",
+        midnight: "#0f172a",
+        navy: "#1e293b",
+        'desc': {
+          light: '#4f5b6d',
+          DEFAULT: '#e9ebec',
+          dark: '#8290a5',
+        },
+        'heading': {
+          light: '#0f172a',
+          DEFAULT: '#000000',
+          dark: '#ffffff',
+        },
+      },
     },
   },
   plugins: [

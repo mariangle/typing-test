@@ -32,21 +32,15 @@ const AuthForm = () => {
     }
     
   return (
-    <div className="mt-8 mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
-            <div className="mt-6">
-                <div className="relative">
-                    <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-300">
-                        </div>
-                    </div>
-                    <div className="relative flex justify-center text-sm">
-                        <span className="bg-white px-2 text-gray-500">
-                            Continue with
-                        </span>
-                    </div>
+    <div className="mt-8 mx-auto w-full max-w-sm">
+        <div className="px-4 py-8 shadow rounded-xl sm:px-10 border dark:border-slate-700">
+            <div>
+                <div className="flex_gap">
+                    <div className="w-full h-[1px] bg-gray-200 dark:bg-slate-700" />
+                    <div className="whitespace-nowrap head px-1">Continue with</div>
+                    <div className="w-full h-[1px] bg-gray-200 dark:bg-slate-700" />
                 </div>
-                <div className="mt-6 flex gap-2">
+                <div className="mt-6 flex flex-col gap-2">
                     <AuthSocialButton 
                         icon={BsGithub}
                         onClick={() => socialAction("github")}

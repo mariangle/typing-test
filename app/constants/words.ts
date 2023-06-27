@@ -1,4 +1,4 @@
-const english = [
+const words = [
     "the",
     "be",
     "to",
@@ -302,4 +302,4 @@ const english = [
 
 ];
 
-export default english;
+export default words;

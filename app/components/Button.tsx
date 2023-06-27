@@ -1,19 +1,18 @@
 "use client"
 
 interface ButtonProps {
-    type?: "button" | "submit" | "reset" | undefined;
     children?:  React.ReactNode;
-    onClick?: () => void
-    danger?: boolean;
+    onClick?: () => void;
     disabled?: boolean;
+    className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({type, children, onClick, disabled}) => {
+const Button: React.FC<ButtonProps> = ({ children, onClick, disabled, className} ) => {
   return (
     <button
         onClick={onClick}
-        type={type}
         disabled={disabled}
+        className={`flex_gap ${className}`}
     >
     {children}
     </button>
