@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import useTypeText from "../hooks/useTypeTest";
 import { useTypeTestContext } from "../context/TypeTestContext";
 
 const Timer = () => {
-    const { timer, setTimer, isPlaying, setIsPlaying, setIsReady, setUserInput } = useTypeTestContext();
+    const { timer, setTimer, isPlaying, setIsPlaying, setIsReady, setUserInput, wpm } = useTypeTestContext();
+    const { postTestResult, endGame } = useTypeText();
 
   useEffect(() => {
     let timerId: NodeJS.Timeout;
@@ -11,10 +13,8 @@ const Timer = () => {
       timerId = setInterval(() => {
         setTimer((prevTimer) => {
           if (prevTimer === 1) {
+            endGame();
             clearInterval(timerId);
-            setUserInput("");
-            setIsPlaying(false);
-            setIsReady(false);
           }
           return prevTimer - 1;
         });

@@ -2,6 +2,8 @@
 
 import { createContext, useContext, useState } from "react";
 
+import { TestResult } from "@prisma/client";
+
 type TypeTestContextProps = {
   timer: number;
   correctWords: number;
@@ -12,6 +14,8 @@ type TypeTestContextProps = {
   currentWordIndex: number,
   isReady: boolean,
   userInput: string,
+  results: TestResult[];
+  setResults: React.Dispatch<React.SetStateAction<TestResult[]>>;
   setUserInput: React.Dispatch<React.SetStateAction<string>>;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   setTimer: React.Dispatch<React.SetStateAction<number>>;
@@ -31,6 +35,8 @@ const initialContext: TypeTestContextProps = {
   isReady: true,
   currentWordIndex: 0,
   userInput: "",
+  results: [],
+  setResults: () => {},
   setUserInput: () => {},
   setIsPlaying: () => {},
   setTimer: () => {},
@@ -43,16 +49,17 @@ const initialContext: TypeTestContextProps = {
 export const TypeTestContext = createContext<TypeTestContextProps>(initialContext);
 
 export const TypeTestProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [timer, setTimer] = useState<number>(10);
+  const [timer, setTimer] = useState<number>(60);
   const [correctWords, setCorrectWords] = useState<number>(0);
   const [wrongWords, setWrongWords] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isReady, setIsReady] = useState(true);
   const [userInput, setUserInput] = useState("");
+  const [results, setResults] = useState<TestResult[]>([])
 
   const accuracy = (correctWords / (wrongWords + correctWords)) * 100;
-  const timeTakenMinutes = 60 / 60; // duraction
+  const timeTakenMinutes = 60 / 60; 
   const wpm = (correctWords / timeTakenMinutes);
 
   return (
@@ -73,7 +80,9 @@ export const TypeTestProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         isReady,
         setIsReady,
         userInput, 
-        setUserInput
+        setUserInput,
+        results,
+        setResults
       }}  
     >
       {children}

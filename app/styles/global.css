@@ -2,20 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  @apply bg-gray-100;
-  color: black;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    background: rgb(0, 0, 0);
-    color: white;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-input {
-  @apply rounded-sm;
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
-.nav-link {
+table {
+  @apply text-sm;
+}
+
+tr th {
+  text-align: left;
+}
+
+td,
+th {
+  @apply p-1.5;
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { useTypeTestContext } from "../context/TypeTestContext";
+import { getShuffledArray } from "../actions/getShuffledArray";
 
 import useTypeText from "../hooks/useTypeTest";
 import englishWords from "../words/englishWords";
@@ -14,16 +15,16 @@ import WordInput from "./WordInput";
 
 const TypeTest = () => {
   
-  const { shuffleArray, resetGame } = useTypeText();
+  const { resetGame } = useTypeText();
   const [words, setWords] = useState<string[]>([]);
-  const { isPlaying, isReady } = useTypeTestContext();
+  const { isPlaying, isReady} = useTypeTestContext();
 
   useEffect(() => {
-    setWords(shuffleArray(englishWords));
+    setWords(getShuffledArray(englishWords));
   }, []);
 
   const handleResetGame = () => {
-    setWords(shuffleArray(englishWords));
+    setWords(getShuffledArray(englishWords));
     resetGame();
   }
 

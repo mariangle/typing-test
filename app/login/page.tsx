@@ -12,7 +12,7 @@ const LoginPage = () => {
         lg:px-8
         bg-gray-100'>
           <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-            <h1 className='text-center'>Logo</h1>
+            <h1 className='text-center'>Typing Test</h1>
             <h2 
               className='
                 mt-6

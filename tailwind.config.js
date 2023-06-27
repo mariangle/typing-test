@@ -9,13 +9,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#0A66C2",
+        primary: "#32a4d9",
+        midnight: "#0f172a"
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
+      colors: {
+        'primary': '#FF5722',
+      }
     },
   },
   plugins: [
