@@ -40,7 +40,7 @@ const Leaderboard = () => {
             <td>{index + 1}</td>
             <td>
               <Image
-                src={result.user?.image || DEFAULT_PFP_URL}
+                src={result?.user?.image || DEFAULT_PFP_URL}
                 alt="profile img"
                 width={24}
                 height={24}
