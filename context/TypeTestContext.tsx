@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState } from "react";
-import { TestResult } from "@prisma/client";
+import { TestResult } from "@/common.types";
 import { TypeTestContextProps, initialState } from "@/types";
 
 export const TypeTestContext = createContext<TypeTestContextProps>(initialState);
