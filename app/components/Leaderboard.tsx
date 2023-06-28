@@ -36,7 +36,7 @@ const Leaderboard = () => {
         </tr>
       </thead>
       <tbody>
-        {topResults?.map((result: TestResult, index) => (
+        {topResults?.map((result, index) => (
           <tr key={result.id}>
             <td>{index + 1}</td>
             <td>

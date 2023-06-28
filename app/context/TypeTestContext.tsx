@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 
-import { TestResult } from "@prisma/client";
+import { TestResult } from "../types";
 
 type TypeTestContextProps = {
   timer: number;
