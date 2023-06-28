@@ -3,12 +3,12 @@ import useTypeText from "../hooks/useTypeTest";
 import { useTypeTestContext } from "../context/TypeTestContext";
 
 const Timer = () => {
-    const { 
-      timer, 
-      setTimer, 
-      isPlaying} 
-    = useTypeTestContext();
-    const { endGame } = useTypeText();
+  const { 
+    timer, 
+    setTimer, 
+    isPlaying} 
+  = useTypeTestContext();
+  const { endGame } = useTypeText();
 
   useEffect(() => {
     let timerId: NodeJS.Timeout;

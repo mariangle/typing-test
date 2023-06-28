@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import { VscDebugRestart } from "react-icons/vsc"
 import { useTypeTestContext } from "../context/TypeTestContext";
-import { getShuffledArray } from "../actions/getShuffledArray";
+import { WORDS } from "@/constant";
 
 import useTypeText from "../hooks/useTypeTest";
-import engWords from "../constants/words";
 
 import Words from "./Words";
 import Timer from "./Timer";
@@ -15,12 +14,11 @@ import Input from "./Input";
 import axios from "axios";
 
 const TypeTest = () => {
-  const { resetGame } = useTypeText();
+  const { shuffleWords, resetGame } = useTypeText();
   const [ words, setWords ] = useState<string[]>([]);
   const { isPlaying, isReady, setResults} = useTypeTestContext();
   
   useEffect(() => {
-    setWords(getShuffledArray(engWords));
     const fetchResults = async () => {
       try {
         const { data: results } = await axios.get("/api/test-results");
@@ -29,11 +27,13 @@ const TypeTest = () => {
         console.error("Error fetching results:", error);
       }
     };
+    
+    setWords(shuffleWords(WORDS));
     fetchResults();
   }, []);
 
   const handleResetGame = () => {
-    setWords(getShuffledArray(engWords));
+    setWords(shuffleWords(WORDS));
     resetGame();
   }
 

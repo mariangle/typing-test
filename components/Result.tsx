@@ -1,5 +1,5 @@
 import { useTypeTestContext } from "../context/TypeTestContext"
-import SaveButton from "./SaveButton";
+import SaveButton from "./SubmitResult";
 
 const Result = () => {
   const { 

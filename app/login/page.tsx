@@ -1,6 +1,13 @@
-import LoginForm from "./components/LoginForm";
+import { redirect } from "next/navigation";
 
-const LoginPage = () => {
+import LoginForm from "./components/LoginForm";
+import getCurrentUser from "@/actions/getCurrentUser";
+
+const LoginPage = async () => {
+  const user = await getCurrentUser();
+
+  if (user) redirect("/")
+
     return (
         <div className="min-h-[80vh] grid content-center">          
           <div className='sm:mx-auto sm:w-full sm:max-w-md'>

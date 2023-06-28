@@ -2,27 +2,17 @@
 
 import AuthSocialButton from "./AuthSocialButton";
 
-import { useEffect } from "react"
 import { BsGithub, BsGoogle } from "react-icons/bs"
 import { toast } from "react-hot-toast"
-import { signIn, useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 
 const AuthForm = () => {
-    const session = useSession();
-    const router = useRouter();
 
-    useEffect(() => {
-        if (session?.status === "authenticated"){
-            router.push("/")
-        }
-    }, [session?.status])
-
-    const socialAction = (action: string) => {
+    const socialLogin = (action: string) => {
         signIn(action, { redirect: false })
         .then((callback) => {
             if (callback?.error) {
-                toast.error("Invalid credentials")
+                toast.error("Something went wrong...")
             }
 
             if (callback?.ok && !callback?.error){
@@ -43,11 +33,11 @@ const AuthForm = () => {
                 <div className="mt-6 flex flex-col gap-2">
                     <AuthSocialButton 
                         icon={BsGithub}
-                        onClick={() => socialAction("github")}
+                        onClick={() => socialLogin("github")}
                     />
                     <AuthSocialButton 
                         icon={BsGoogle}
-                        onClick={() => socialAction("google")}
+                        onClick={() => socialLogin("google")}
                     />
                 </div>
             </div>

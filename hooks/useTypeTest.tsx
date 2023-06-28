@@ -15,6 +15,19 @@ const useTypeText = () => {
     wpm,
   } = useTypeTestContext();
 
+  const shuffleWords = (array: string[]): string[] => {
+    const shuffledArray = [...array];
+  
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      const temporaryValue = shuffledArray[i];
+      shuffledArray[i] = shuffledArray[randomIndex];
+      shuffledArray[randomIndex] = temporaryValue;
+    }
+  
+    return shuffledArray;
+  };
+
   const resetGame = () => {
     setCorrectWords(0);
     setWrongWords(0);
@@ -29,22 +42,23 @@ const useTypeText = () => {
     setIsReady(false);
     setIsPlaying(false);
     setUserInput("");
-    checkIfInTop10();
+    isScoreInTop10();
   };
 
-  const checkIfInTop10 = () => {
+  const isScoreInTop10 = () => {
     const topResults = results
       .sort((a, b) => b.wpm - a.wpm)
       .slice(0, 10);
-    const isTop10 = topResults.some((result) => result.wpm < wpm);
-    setIsInTop10(isTop10);
+    const isInTop10 = topResults.some((result) => result.wpm < wpm);
+    setIsInTop10(isInTop10);
   };
-
+  
   useEffect(() => {
-    checkIfInTop10();
+    isScoreInTop10();
   }, [wpm, setIsInTop10]);
 
   return {
+    shuffleWords,
     resetGame,
     endGame,
   };

@@ -1,13 +1,13 @@
 "use client"
 
-interface ButtonProps {
+type Props = {
     children?:  React.ReactNode;
     onClick?: () => void;
     disabled?: boolean;
     className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, disabled, className} ) => {
+const Button: React.FC<Props> = ({ children, onClick, disabled, className} ) => {
   return (
     <button
         onClick={onClick}

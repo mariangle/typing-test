@@ -1,10 +1,9 @@
 "use client"
 
 import { useEffect } from "react";
-import { useTypeTestContext } from "../context/TypeTestContext";
-import { getTimeElapsed } from "../actions/getTimeElapsed";
-import { DEFAULT_PFP_URL } from "../constants/constants";
-import { TestResult } from "../types";
+import { useTypeTestContext } from "../../../context/TypeTestContext";
+import { getTimeElapsed } from "../../../actions/getTimeElapsed";
+import { DEFAULT_PFP_URL } from "../../../constant";
 
 import axios from "axios";
 import Image from "next/image";

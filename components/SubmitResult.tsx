@@ -6,7 +6,7 @@ import axios from 'axios';
 import Button from "./Button";
 import { toast } from "react-hot-toast";
 
-const SaveButton = () => {
+const SubmitResult = () => {
   const { wpm, isInTop10 } = useTypeTestContext();
   const { resetGame } = useTypeText();
   const router = useRouter();
@@ -36,4 +36,4 @@ const SaveButton = () => {
   )
 }
 
-export default SaveButton;
+export default SubmitResult;
