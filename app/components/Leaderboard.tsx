@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useTypeTestContext } from "../context/TypeTestContext";
 import { getTimeElapsed } from "../actions/getTimeElapsed";
 import { DEFAULT_PFP_URL } from "../constants/constants";
+import { TestResult } from "../types";
 
 import axios from "axios";
 import Image from "next/image";
@@ -35,7 +36,7 @@ const Leaderboard = () => {
         </tr>
       </thead>
       <tbody>
-        {topResults?.map((result, index) => (
+        {topResults?.map((result: TestResult, index) => (
           <tr key={result.id}>
             <td>{index + 1}</td>
             <td>
