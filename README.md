@@ -1,7 +1,9 @@
-<a href="https://wpm-test.vercel.app">
-  <img alt="typing test screenshot" src="https://github.com/mariangle/typing-test-ts/assets/124585244/af37ff86-03bc-4d1b-89d0-bf99515ae35f">
-  <h1 align="center">Typing Test</h1>
-</a>
+<p align="center">
+  <a href="https://wpm-test.vercel.app">
+    <img alt="typing test screenshot" src="https://github.com/mariangle/typing-test-ts/assets/124585244/5b397f98-7a00-4e89-bddf-a4905f6b4c21">
+    <h1 align="center">Typing Test</h1>
+  </a>
+</p>
 
 <p align="center">
   An intuitive application for testing your typing speed and improving your word-per-minute (WPM).
