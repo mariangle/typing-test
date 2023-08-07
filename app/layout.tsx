@@ -1,8 +1,9 @@
-import { TypeTestProvider } from '../context/TypeTestContext'
+import ReduxProvider from '@/providers/redux-provider'
+import ToasterProvider from '@/providers/toaster-provider'
+import AuthProvider from '@/providers/auth-provider'
 
-import ToasterContext from '../context/ToasterContext'
-import AuthContext from '../context/AuthContext'
-import Navbar from '../components/Navbar'
+import Navbar from '@/components/Navbar'
+
 
 import './index.css'
 import { Inter } from 'next/font/google'
@@ -20,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-      <AuthContext>
-        <TypeTestProvider>
+      <AuthProvider>
+        <ReduxProvider>
           <html lang="en" className='dark'>
             <body className={`layout ${inter.className}`}>
               <div>
@@ -29,12 +30,12 @@ export default function RootLayout({
               </div>
               <main className='main'>
                 <Navbar />
-                <ToasterContext />
+                <ToasterProvider />
                 {children}
               </main>
             </body>
           </html>
-        </TypeTestProvider>
-      </AuthContext>
+        </ReduxProvider>
+      </AuthProvider>
   )
 }

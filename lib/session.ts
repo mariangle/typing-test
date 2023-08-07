@@ -23,9 +23,9 @@ export const authOptions: AuthOptions = {
     session: {
         strategy: "jwt",
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET as string,
 }
 
 export const getSession = async () =>  {
-    return await getServerSession(authOptions);
+  return await getServerSession(authOptions);
 }

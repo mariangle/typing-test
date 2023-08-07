@@ -1,6 +1,9 @@
 import Leaderboard from "./components/Leaderboard"
+import getTopResults from "@/actions/get-results"
 
-const LeaderboardPage = () => {
+const LeaderboardPage = async () => {
+  const results = await getTopResults();
+
   return (
     <div className="min-h-[80vh] grid content-center">
       <div className="my-8 flex-col flex_center">
@@ -9,7 +12,7 @@ const LeaderboardPage = () => {
         <p className="my-4 desc">The leaderboard displays the top 10 results ranked by WPM.</p>
       </div>
       <div className="p-2 w-full border dark:border-slate-800 rounded-lg shadow-lg bg-gray-50 dark:bg-navy max-w-lg mx-auto">
-        <Leaderboard />
+        <Leaderboard results={results}/>
       </div>
     </div>
   )

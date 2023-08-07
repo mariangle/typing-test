@@ -1,28 +1,19 @@
-"use client"
+import { getTimeElapsed } from "@/actions/get-time-elapsed";
+import { DEFAULT_PFP_URL } from "@/lib/constants";
 
-import { useEffect } from "react";
-import { useTypeTestContext } from "../../../context/TypeTestContext";
-import { getTimeElapsed } from "../../../actions/getTimeElapsed";
-import { DEFAULT_PFP_URL } from "../../../constant";
-
-import axios from "axios";
 import Image from "next/image";
 
-const Leaderboard = () => {
-  const { results, setResults } = useTypeTestContext();
+import { TestResult, User } from "@prisma/client";
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      const { data: results } = await axios.get("/api/test-results");
-      setResults(results);
-    };
-    fetchResults();
-  }, []);
+interface LeaderboardProps {
+  results: ExtendedResult[];
+}
 
-  const topResults = results
-  .sort((a, b) => b.wpm - a.wpm) 
-  .slice(0, 10); 
+interface ExtendedResult extends TestResult {
+  user: User | null;
+}
 
+const Leaderboard: React.FC<LeaderboardProps> = ({ results }) => {
   return (
     <table className="desc leaderboard">
       <thead>
@@ -35,7 +26,7 @@ const Leaderboard = () => {
         </tr>
       </thead>
       <tbody>
-        {topResults?.map((result, index) => (
+      {results?.map((result, index) => (
           <tr key={result.id}>
             <td>{index + 1}</td>
             <td>
@@ -53,7 +44,7 @@ const Leaderboard = () => {
             <td>{result.wpm}</td>
             <td>{getTimeElapsed(result.createdAt)}</td>
           </tr>
-        ))}
+          ))}
       </tbody>
     </table>
   );

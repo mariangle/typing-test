@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 
 import LoginForm from "./components/LoginForm";
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getSession } from "@/lib/session";
 
 const LoginPage = async () => {
-  const user = await getCurrentUser();
+  const user = await getSession();
 
   if (user) redirect("/")
 

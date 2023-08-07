@@ -1,23 +1,32 @@
-import { useTypeTestContext } from "../context/TypeTestContext";
+import type { RootState } from "@/store/store";
+import { useDispatch, useSelector } from 'react-redux';
+import {     
+  setCorrectWords,
+  setWrongWords,
+  setIsPlaying,
+  setCurrentWordIndex,
+} from "@/store/game-slice";
 
-const Input = ({ words } : { words : string[]}) => {
-  const {
-    setCorrectWords,
-    setWrongWords,
-    isPlaying,
-    setIsPlaying,
-    currentWordIndex,
-    setCurrentWordIndex,
-    isReady,
-    userInput,
-    setUserInput,
-  } = useTypeTestContext();
+interface InputProps {
+  words: string[];
+  userInput: string;
+  setUserInput: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Input: React.FC<InputProps> = ({ words, userInput, setUserInput }) => {
+  const { 
+    isPlaying, 
+    currentWordIndex, 
+    isReady, 
+    correctWords,
+    wrongWords
+   } = useSelector((state: RootState) => state.game)
+  const dispatch = useDispatch();
 
  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!isPlaying && isReady) {
-      setIsPlaying(true);
+      dispatch(setIsPlaying(true));
     }
-
     setUserInput(event.target.value);
   };
     
@@ -28,12 +37,11 @@ const Input = ({ words } : { words : string[]}) => {
   
       if (trimmedUserInput !== "") {
         if (trimmedWord === trimmedUserInput) {
-          setCorrectWords((prevState) => prevState + 1);
+          dispatch(setCorrectWords(correctWords + 1));
         } else {
-          setWrongWords((prevState) => prevState + 1);
+          dispatch(setWrongWords(wrongWords + 1));
         }
-  
-        setCurrentWordIndex((prevState) => prevState + 1);
+        dispatch(setCurrentWordIndex(currentWordIndex + 1));
       }
       setUserInput("");
     }
@@ -46,7 +54,6 @@ const Input = ({ words } : { words : string[]}) => {
         onKeyDown={handleSpacebar}
         disabled={!isReady}
         className={`input_word ${!isReady ? "cursor-not-allowed" : ""}`}
-        placeholder={!isReady ? "Reset to try again." : ""}
     />
   )
 }

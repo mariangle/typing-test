@@ -1,20 +1,25 @@
-import { useTypeTestContext } from "../context/TypeTestContext";
 import { useRouter } from "next/navigation";
 import useTypeText from "../hooks/useTypeTest";
-
+import { useSelector } from 'react-redux'
+import { RootState } from "@/store/store";
 import axios from 'axios';
 import Button from "./Button";
 import { toast } from "react-hot-toast";
+import getResults from "@/actions/get-results";
 
-const SubmitResult = () => {
-  const { wpm, isInTop10 } = useTypeTestContext();
-  const { resetGame } = useTypeText();
+const SubmitResult = async () => {
+  const { wpm } = useSelector((state: RootState) => state.game)
+
+  const { onResetGame } = useTypeText();
   const router = useRouter();
+
+  const checkIsInTop10 = () => {
+  }
 
   const handeSubmitResult = async () => {
     try {
       await axios.post("/api/test-results", { wpm });
-      resetGame();
+      onResetGame();
       router.push("/leaderboard")
       toast.success("You're now on the leaderboard!")
     } catch (error) {
@@ -24,14 +29,7 @@ const SubmitResult = () => {
 
   return (
     <>
-      { isInTop10 && (
-        <div>
-          <span className="text-xs flex_center">You&#39;re in the top 10!</span>
-          <Button onClick={handeSubmitResult} className="mt-2 w-full p-2 rounded-lg flex_center font-semibold primary_bg">
-          Save to Leaderboard
-          </Button>
-        </div>
-      )}
+
     </>
   )
 }

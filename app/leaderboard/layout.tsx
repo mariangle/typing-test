@@ -1,5 +1,5 @@
 export const metadata = {
-    title: 'Leaderboard',
+    title: 'Leaderboard | Typing Test',
     description: 'View the top performers on the Typing Test leaderboard and compare your typing skills',
   }
   

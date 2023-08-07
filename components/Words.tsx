@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react";
-import { useTypeTestContext } from "../context/TypeTestContext";
+import { useSelector } from 'react-redux'
+import type { RootState } from "@/store/store";
 
 interface WordProps {
   words: string[],
 }
 
 const Words = ({ words }: WordProps) => {
-  const { currentWordIndex } = useTypeTestContext();
+  const currentWordIndex = useSelector((state: RootState) => state.game.currentWordIndex)
   const wordsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Words = ({ words }: WordProps) => {
     <div className="relative overflow-hidden rounded-2xl border border-slate-700 w-full shadow-xl">
       <div className="pt-2 bg-slate-800">
         <div className="flex text-slate-400 text-xs leading-6">
-          <div className="flex-none text-sky-300 border-t border-b border-t-transparent border-b-sky-300 px-4 py-1 flex items-center">typetest.config.js</div>
+          <div className="flex-none text-sky-300 border-t border-b border-t-transparent border-b-sky-300 px-4 py-1 flex items-center">typetest.config.ts</div>
           <div className="flex-auto flex items-center bg-slate-700/50 border border-slate-500/30 rounded-tl" />
         </div>
         <div 

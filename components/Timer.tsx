@@ -1,34 +1,33 @@
-import { useEffect, useState } from "react";
-import useTypeText from "../hooks/useTypeTest";
-import { useTypeTestContext } from "../context/TypeTestContext";
+import { useEffect } from "react";
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setTimer, endGame } from "@/store/game-slice";
+import type { RootState } from "@/store/store";
 
 const Timer = () => {
   const { 
-    timer, 
-    setTimer, 
-    isPlaying} 
-  = useTypeTestContext();
-  const { endGame } = useTypeText();
+      timer, 
+      isPlaying,
+   } = useSelector((state: RootState) => state.game)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let timerId: NodeJS.Timeout;
 
     if (isPlaying && timer > 0) {
       timerId = setInterval(() => {
-        setTimer((prevTimer) => {
-          if (prevTimer === 1) {
-            endGame();
-            clearInterval(timerId);
-          }
-          return prevTimer - 1;
-        });
+        dispatch(setTimer(timer - 1));
       }, 1000);
+    } else if (timer === 0) {
+      dispatch(endGame());
     }
 
     return () => {
       clearInterval(timerId);
     };
-  }, [isPlaying]);
+  }, [dispatch, isPlaying, timer]);
+
 
   const calculateElapsedTime = () => {
     const minutes = Math.floor(timer / 60);

@@ -1,5 +1,7 @@
-import { useTypeTestContext } from "../context/TypeTestContext"
-import SaveButton from "./SubmitResult";
+import { useSelector } from 'react-redux'
+import { RootState } from "@/store/store";
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const Result = () => {
   const { 
@@ -7,7 +9,18 @@ const Result = () => {
     accuracy, 
     correctWords, 
     wrongWords, 
-  } = useTypeTestContext();
+  } = useSelector((state: RootState) => state.game)
+
+  useEffect(() => {
+    const submitResult = async () => {
+      try {
+        await axios.post("/api/results", { wpm });
+      } catch (error) {
+        return null;
+      } 
+    }
+    submitResult();
+  }, [])
 
   return (
     <div className="border rounded-lg overflow-hidden secondary_bg w-full sm:max-w-[250px] mt-8">
@@ -33,7 +46,6 @@ const Result = () => {
             <span className="text-red-700 dark:text-red-500">{wrongWords}</span>
           </div>
         </div>
-        <SaveButton />
       </div>
     </div>
   )

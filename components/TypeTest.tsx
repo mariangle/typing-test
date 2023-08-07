@@ -2,39 +2,32 @@
 
 import { useEffect, useState } from "react";
 import { VscDebugRestart } from "react-icons/vsc"
-import { useTypeTestContext } from "../context/TypeTestContext";
-import { WORDS } from "@/constant";
+import { WORDS } from "@/lib/constants";
+import { shuffleWords } from "@/actions/shuffle-words";
+import { useSession } from "next-auth/react";
 
-import useTypeText from "../hooks/useTypeTest";
-
-import Words from "./Words";
-import Timer from "./Timer";
-import Result from "./Result";
-import Input from "./Input";
-import axios from "axios";
+import useTypeText from "@/hooks/useTypeTest";
+import Button from "@/components/Button";
+import Words from "@/components/Words";
+import Timer from "@/components/Timer";
+import Result from "@/components/Result";
+import Input from "@/components/Input";
 
 const TypeTest = () => {
-  const { shuffleWords, resetGame } = useTypeText();
+  const session = useSession();
+  const [ userInput, setUserInput] = useState<string>("");
+  const { onResetGame, isPlaying, isReady } = useTypeText();
   const [ words, setWords ] = useState<string[]>([]);
-  const { isPlaying, isReady, setResults} = useTypeTestContext();
   
   useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        const { data: results } = await axios.get("/api/test-results");
-        setResults(results)
-      } catch (error) {
-        console.error("Error fetching results:", error);
-      }
-    };
-    
     setWords(shuffleWords(WORDS));
-    fetchResults();
-  }, []);
+    console.log(session.status)
+  }, [session]);
 
   const handleResetGame = () => {
     setWords(shuffleWords(WORDS));
-    resetGame();
+    setUserInput("");
+    onResetGame();
   }
 
   return (
@@ -42,15 +35,15 @@ const TypeTest = () => {
       <Words words={words}/>
       <div className="mt-4 bg-slate-500/10 p-2 rounded-2xl border dark:border-slate-700">
         <div className="flex_gap flex-col sm:flex-row max-w-md w-full mx-auto">
-          <Input words={words} />
+          <Input words={words} userInput={userInput} setUserInput={setUserInput}/>
           <div className="flex_gap">
             <Timer />
-            <button 
+            <Button 
               onClick={handleResetGame}
               className="primary_bg p-3 rounded-lg"
             >
               <VscDebugRestart size={28}/>
-            </button>
+            </Button>
           </div>
         </div>
       </div>

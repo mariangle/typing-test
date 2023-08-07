@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Login',
+  title: 'Login | Typing Test',
   description: 'Login to access the Typing Test app and see yourself on the leaderboard',
 }
 

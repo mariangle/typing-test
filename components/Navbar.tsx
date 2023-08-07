@@ -4,7 +4,7 @@ import Link from "next/link";
 import Button from "./Button";
 import Image from "next/image";
 
-import { DEFAULT_PFP_URL, NAV_LINKS } from '@/constant';
+import { DEFAULT_PFP_URL, NAV_LINKS } from '@/lib/constants';
 import { HiOutlineSun, HiOutlineMoon, HiOutlineLogout } from "react-icons/hi"
 
 import { useSession, signOut } from "next-auth/react";
