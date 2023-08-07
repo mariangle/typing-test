@@ -1,11 +1,5 @@
-import type { RootState } from "@/store/store";
-import { useDispatch, useSelector } from 'react-redux';
-import {     
-  setCorrectWords,
-  setWrongWords,
-  setIsPlaying,
-  setCurrentWordIndex,
-} from "@/store/game-slice";
+import { useDispatch } from 'react-redux';
+import useTypeText from "@/hooks/useTypeTest";
 
 interface InputProps {
   words: string[];
@@ -19,8 +13,12 @@ const Input: React.FC<InputProps> = ({ words, userInput, setUserInput }) => {
     currentWordIndex, 
     isReady, 
     correctWords,
-    wrongWords
-   } = useSelector((state: RootState) => state.game)
+    wrongWords,
+    setCorrectWords,
+    setWrongWords,
+    setIsPlaying,
+    setCurrentWordIndex,
+   } = useTypeText()
   const dispatch = useDispatch();
 
  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

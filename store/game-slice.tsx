@@ -10,7 +10,6 @@ export interface GameState {
   isPlaying: boolean;
   currentWordIndex: number;
   isReady: boolean;
-  userInput: string;
   results: TestResult[];
 }
 
@@ -23,7 +22,6 @@ const initialState: GameState = {
   isPlaying: false,
   isReady: true,
   currentWordIndex: 0,
-  userInput: '',
   results: [],
 };
 
@@ -49,9 +47,6 @@ const gameSlice = createSlice({
     setIsReady: (state, action: PayloadAction<boolean>) => {
       state.isReady = action.payload;
     },
-    setUserInput: (state, action: PayloadAction<string>) => {
-      state.userInput = action.payload;
-    },
     setResults: (state, action: PayloadAction<TestResult[]>) => {
       state.results = action.payload;
     },
@@ -64,13 +59,11 @@ const gameSlice = createSlice({
       state.isPlaying = false;
       state.currentWordIndex = 0;
       state.isReady = true;
-      state.userInput = '';
       state.results = [];
     },
     endGame: (state) => {
       state.isPlaying = false;
       state.isReady = false;
-      state.userInput = "";
       state.wpm = state.correctWords;
       state.accuracy = state.correctWords / (state.correctWords + state.wrongWords)
     },
@@ -84,7 +77,6 @@ export const {
   setIsPlaying, 
   setCurrentWordIndex, 
   setIsReady, 
-  setUserInput, 
   setResults, 
   resetGame,
   endGame

@@ -1,13 +1,12 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from 'react-redux'
-import type { RootState } from "@/store/store";
+import useTypeText from "@/hooks/useTypeTest";
 
 interface WordProps {
   words: string[],
 }
 
 const Words = ({ words }: WordProps) => {
-  const currentWordIndex = useSelector((state: RootState) => state.game.currentWordIndex)
+  const  {currentWordIndex } = useTypeText();
   const wordsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

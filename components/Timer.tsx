@@ -1,16 +1,14 @@
 import { useEffect } from "react";
-
-import { useDispatch, useSelector } from 'react-redux';
-
-import { setTimer, endGame } from "@/store/game-slice";
-import type { RootState } from "@/store/store";
+import { useDispatch } from 'react-redux';
+import useTypeText from "@/hooks/useTypeTest";
 
 const Timer = () => {
   const { 
       timer, 
       isPlaying,
-      isReady
-   } = useSelector((state: RootState) => state.game)
+      setTimer,
+      endGame
+   } = useTypeText();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,7 +37,7 @@ const Timer = () => {
   return (
   <div 
     className={`border p-3 rounded-lg text-lg 
-    ${isPlaying ? "bg-green-800 text-green-500 border-green-600" : !isPlaying && !isReady ? "bg-red-800 text-red-500 border-red-600" : "secondary_bg"}`}
+    ${isPlaying ? "bg-yellow-600 text-yellow-100 border-none" : "secondary_bg"}`}
   >
     {calculateElapsedTime()}
   </div>
