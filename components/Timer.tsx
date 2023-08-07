@@ -9,6 +9,7 @@ const Timer = () => {
   const { 
       timer, 
       isPlaying,
+      isReady
    } = useSelector((state: RootState) => state.game)
   const dispatch = useDispatch();
 
@@ -36,10 +37,12 @@ const Timer = () => {
   };
 
   return (
-    <div 
-      className="border p-3 rounded-lg secondary_bg text-lg">
-      {calculateElapsedTime()}
-    </div>
+  <div 
+    className={`border p-3 rounded-lg text-lg 
+    ${isPlaying ? "bg-green-800 text-green-500 border-green-600" : !isPlaying && !isReady ? "bg-red-800 text-red-500 border-red-600" : "secondary_bg"}`}
+  >
+    {calculateElapsedTime()}
+  </div>
     )
 };
 

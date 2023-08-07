@@ -12,16 +12,22 @@ export const POST = async (req: Request) => {
     }
 
     const user = await getCurrentUser();
-
     const results = await getTopResults();
 
+    const lessResults = results.length < 10;
     const amongTopResults = results.some((result) => result.wpm < wpm);
 
-    console.log(wpm)
-    console.log(results)
+    if (lessResults) {
+      const testResult = await prisma.testResult.create({
+        data: {
+          wpm,
+          userId: user?.id,
+        },
+      });
 
-    if (!amongTopResults) {
-      return new NextResponse("WPM not among top results", { status: 400 });
+      return NextResponse.json(testResult, { status: 200 });
+    } else if (!amongTopResults) {
+      return new NextResponse("Your result doesn't qualify to be on the leaderboard", { status: 400 });
     }
 
     const testResult = await prisma.testResult.create({

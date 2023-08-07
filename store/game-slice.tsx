@@ -56,7 +56,7 @@ const gameSlice = createSlice({
       state.results = action.payload;
     },
     resetGame: (state) => {
-      state.timer = 5;
+      state.timer = 60;
       state.correctWords = 0;
       state.wrongWords = 0;
       state.accuracy = 0;
@@ -73,7 +73,6 @@ const gameSlice = createSlice({
       state.userInput = "";
       state.wpm = state.correctWords;
       state.accuracy = state.correctWords / (state.correctWords + state.wrongWords)
-      // TODO: check if score is in top 10
     },
   },
 });

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import Button from "./Button";
+import Button from "@/components/Button";
 import Image from "next/image";
 
 import { DEFAULT_PFP_URL, NAV_LINKS } from '@/lib/constants';
@@ -9,25 +9,25 @@ import { HiOutlineSun, HiOutlineMoon, HiOutlineLogout } from "react-icons/hi"
 
 import { useSession, signOut } from "next-auth/react";
 import { useState } from 'react';
-import { useDarkMode } from "../hooks/useDarkmode";
+import { useDarkMode } from "@/hooks/useDarkmode";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <ul className="flex_between w-full max-w-screen-lg mx-auto px-4">
+      <div className="flex_between w-full max-w-screen-lg mx-auto px-4">
         <div className="flex_gap gap-3">
           <Logo />  
           <Version />
           <Banner />
         </div>
-        <div className="flex gap-2 md:gap-4 items-center">
-          <NavLink linkIndex={1}></NavLink>
+        <ul className="flex gap-2 md:gap-4 items-center">
+          <NavLink linkIndex={1} />
           <Divider />
           <ThemeIcon />
           <AuthNav />
-        </div>
-      </ul>
+        </ul>
+      </div>
     </nav>
   )
 } 
@@ -37,7 +37,7 @@ const NavLink = ({ linkIndex }: { linkIndex: number }) => {
   const pathname = usePathname();
 
   return (
-    <Link href={href} className={`nav_link ${pathname === href ? "active" : ""}`}>
+    <Link href={href} className={`nav_link ${pathname === '/leaderboard' ? "active" : ""}`}>
       <span>{text}</span>
     </Link>
   );
@@ -87,7 +87,7 @@ const AuthNav = () => {
   return (
     <div className='relative text-sm'>
       {status === "unauthenticated" && (
-        <NavLink linkIndex={2}></NavLink>
+        <NavLink linkIndex={2} />
       )}
       {status === "authenticated" && (
         <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ const AuthNav = () => {
   )
 }
 
-const Version = () => <span className="hidden md:block text-xs py-2 px-3 rounded-full bg-gray-100 text-gray-500 dark:bg-slate-800 dark:text-slate-400">v0.1.0</span>;
+const Version = () => <span className="hidden md:block text-xs py-2 px-3 rounded-full bg-gray-100 text-gray-500 dark:bg-slate-800 dark:text-slate-400">v0.1.1</span>;
 const Divider = () => <div className="h-[25px] w-[1px] border-l border-slate-200 dark:border-slate-700"/>;
 
 export default Navbar;
