@@ -37,7 +37,7 @@ const NavLink = ({ linkIndex }: { linkIndex: number }) => {
   const pathname = usePathname();
 
   return (
-    <Link href={href} className={`nav_link ${pathname === '/leaderboard' ? "active" : ""}`}>
+    <Link href={href} className={`nav_link ${pathname === href ? "active" : ""}`}>
       <span>{text}</span>
     </Link>
   );
